@@ -1,0 +1,11 @@
+/* TEAM */
+	Derek Pennycuff
+	Contact: dap6000 [at] gmail.com
+	Twitter: @dap6000
+	Github: @dap6000
+	URI: derek.pennycuff.rocks
+
+/* THANKS */
+	Javascript 30 project by Wes Bos
+	Personal URI: http://wesbos.com/
+	Project URI: https://javascript30.com/
