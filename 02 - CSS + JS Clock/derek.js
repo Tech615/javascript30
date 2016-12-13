@@ -28,8 +28,7 @@ function tick() {
 
 /**
  * @param value An int, such as the current count of seconds
- * @param base  An intA numberAn int, such as 60 seconds in a trip around a
- *  clock face
+ * @param base  An int, such as 60 seconds in a trip around a clock face
  * @return An int as a degree value for positioning our clock hands
  */
 function toDeg(value, base) {
