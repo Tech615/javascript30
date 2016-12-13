@@ -60,7 +60,8 @@ function minDeg(now) {
  * New values once per every 5 minutes
  */
 function hourDeg(now) {
-  return (toDeg(now.getHours() + Math.floor(now.getMinutes() / 5), 60));
+  return (toDeg(now.getHours(), 12) +
+    toDeg(Math.floor(now.getMinutes() / 5), 60) - 90);
 }
 
 // Call tick() once per second
