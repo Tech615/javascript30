@@ -18,6 +18,7 @@
 const secondHand = document.querySelector('.second-hand');
 const minHand = document.querySelector('.min-hand');
 const hourHand = document.querySelector('.hour-hand');
+const noon_offset = 90;
 // Update the clock display based on current Date()
 function tick() {
   const now = new Date();
@@ -32,7 +33,7 @@ function tick() {
  * @return An int as a degree value for positioning our clock hands
  */
 function toDeg(value, base) {
-  return ((value / base) * 360) + 90;
+  return ((value / base) * 360);
 }
 /**
  * @param now A Date object
@@ -42,7 +43,9 @@ function toDeg(value, base) {
  */
 function secDeg(now) {
   return (toDeg(now.getSeconds(), 60) +
-  ((now.getMinutes() + now.getHours()) * 360));
+  ((now.getMinutes() + now.getHours()) * 360) +
+  noon_offset
+);
 }
 /**
  * @param now A Date object
@@ -51,7 +54,10 @@ function secDeg(now) {
  * New values once per minute
  */
 function minDeg(now) {
-  return (toDeg(now.getMinutes(), 60) + (now.getHours() * 360));
+  return (toDeg(now.getMinutes(), 60) +
+    (now.getHours() * 360) +
+    noon_offset
+  );
 }
 /**
  * @param now A Date object
@@ -61,7 +67,23 @@ function minDeg(now) {
  */
 function hourDeg(now) {
   return (toDeg(now.getHours(), 12) +
-    toDeg(Math.floor(now.getMinutes() / 5), 60) - 90);
+    minOffset(now) +
+    noon_offset
+  );
+}
+/**
+ * @param now A Date object
+ * @return An int as a degree value for nuding our hour hand slightly based
+ * on the current minute.
+ *
+ * Valid inputs for minute values range from 0 to 59. Valid outputs range
+ * from zero to 30. We only want to update the position of the hour hand
+ * once every 5 minutes. That's 12 divisions between noon and 1 (or any
+ * other adjacent 'hour' mark pairs) so a total of 144 (12 * 12) around the
+ * entire clock face.
+ */
+function minOffset(now) {
+  return toDeg(Math.floor(now.getMinutes() / 5), 144);
 }
 
 // Call tick() once per second
